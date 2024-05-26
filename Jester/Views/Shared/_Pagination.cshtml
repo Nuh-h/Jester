@@ -1,0 +1,30 @@
+﻿@model PaginationViewModel;
+
+<nav class="flex flex-wrap justify-center gap-2 border border-solid rounded w-fit p-[0.4rem] shadow-lg m-auto" aria-label="pagination for news" aria-controls="news-list">
+    @if (Model.PageIndex > 1){
+        <div class="flex gap-3 flex-wrap items-center bg-[#004aff] text-white rounded text-xl">
+            <a class="p-4 hover:text-inherit" href="?page=@(Model.PageIndex - 1)" rel="prev">
+                    Previous<span class="sr-only"> page</span>
+            </a>
+        </div>
+    }
+    @if(Model.PageIndex != Model.PageCount){
+        <ul class="flex flex-wrap items-center mx-2 list-none gap-2">
+        @for (int pageNo = 1; pageNo <= Model.PageCount; pageNo++)
+            {
+                <li class="p-0 flex">
+                    <a class="p-4 text-lg hover:text-inherit rounded border-solid @(pageNo==Model.PageIndex ? "border-[#3F51B5] border-2 text-[#3F51B5] ":"border")" href="?page=@pageNo" aria-label="Page @pageNo" aria-current="page">
+                        @pageNo
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+    @if (Model.PageIndex < Model.PageCount){
+        <div class="flex gap-3 flex-wrap items-center bg-[#004aff] text-white rounded text-xl">
+            <a class="p-4 hover:text-inherit" href="?page=@(Model.PageIndex + 1)" rel="next">
+                    Next<span class="sr-only"> page</span>
+            </a>
+        </div>
+    }
+</nav>

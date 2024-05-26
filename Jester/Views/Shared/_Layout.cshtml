@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Jester</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Jester.styles.css" asp-append-version="true" />
+    @await Html.PartialAsync("_Favicons")
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-[100vh] flex flex-col">
+    <header>
+        <nav  class="bg-blue-100/20">
+            <div  class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                <div  class="relative flex h-16 py-8 items-center justify-between">
+                    <div  class="flex flex-1 items-center justify-center sm:items-center sm:justify-between">
+                        <div  class="flex flex-shrink-0 items-center">
+                            <img class="w-14 h-full" src="/jester.png"/>
+                            <a class="text-4xl bg-gradient-to-r from-blue-600 via-purple-500 to-red-400 inline-block !text-transparent bg-clip-text w-auto" href="/">
+                                Jester
+                            </a>
+                        </div>
+                        <div  class="hidden sm:ml-6 sm:block">
+                            <div  class="flex space-x-4">
+                                @{
+                                    var activePageClasses = "bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium";
+                                    var nonActivePageClasses = "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium";
+                                }
+                                <a  href="/" class="@(ViewData["CurrentNavigationPage"]=="Home" ? activePageClasses : nonActivePageClasses)" aria-current="@(ViewData["CurrentNavigationPage"]=="Home" ? "page":null)">Home</a>
+                                <a  href="/News" class="@(ViewData["CurrentNavigationPage"]=="All" ? activePageClasses : nonActivePageClasses)" aria-current="@(ViewData["CurrentNavigationPage"]=="All" ? "page":null)">All news</a>
+                                <a  href="/News/Create" class="@(ViewData["CurrentNavigationPage"]=="Create" ? activePageClasses : nonActivePageClasses)" aria-current="@(ViewData["CurrentNavigationPage"]=="Create" ? "page":null)">Create news</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Mobile menu, show/hide based on menu state. -->
+            <div  class="sm:hidden" id="mobile-menu">
+                <div  class="space-y-1 px-2 pb-3 pt-2">
+                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                    <a  href="/" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Home</a>
+                    <a  href="/NewsItems" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">All news</a>
+                    <a  href="/NewsItems/Create" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Create</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3 min-h-[80vh]">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted w-full self-end">
+        <div class="container">
+            &copy; 2024 - Nuh
+        </div>
+    </footer>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

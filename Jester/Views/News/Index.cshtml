@@ -1,0 +1,14 @@
+﻿@model NewsListViewModel;
+
+@{
+    ViewData["Title"] = "All news";
+    ViewData["CurrentNavigationPage"] = "All";
+}
+
+<div class="text-center p-8 my-4">
+    <h1 class="text-8xl">Keep your pulse</h1>
+    <p class="text-4xl">on the latest</p>
+
+</div>
+
+@await Html.PartialAsync("_NewsListWithSearchPagination", Model)

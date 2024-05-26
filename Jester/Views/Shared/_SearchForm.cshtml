@@ -1,0 +1,20 @@
+﻿@model SearchFormViewModel;
+
+@if (Model != null)
+{
+    <form class="flex justify-center items-center border border-solid rounded w-[80%] p-[0.4rem] shadow-lg m-auto my-2">
+        <input name="@Model.Name" type="search" class="p-3 text-lg w-full" placeholder="@Model.Placeholder" value="@Model.SearchTerm" />
+        <button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="4em" height="100%" viewBox="0 0 36 36" class="bg-[#004aff] rounded p-2">
+                <path fill="white" d="M16.33 5.05A10.95 10.95 0 1 1 5.39 16A11 11 0 0 1 16.33 5.05m0-2.05a13 13 0 1 0 13 13a13 13 0 0 0-13-13" />
+                <path fill="white" d="m35 33.29l-7.37-7.42l-1.42 1.41l7.37 7.42A1 1 0 1 0 35 33.29" />
+                <path fill="none" d="M0 0h36v36H0z" />
+            </svg>
+        </button>
+    </form>
+
+    @if (!string.IsNullOrWhiteSpace(Model.SearchTerm))
+    {
+        <p class="m-auto relative text-xl font-bold -mb-2 p-4 pb-0 mt-2">Found @Model.TotalResults result@(Model.TotalResults > 1 ? "s":"") for "@Model.SearchTerm"</p>
+    }
+}

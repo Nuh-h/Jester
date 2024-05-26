@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31903.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jester", "Jester\Jester.csproj", "{CFB9D69F-EEEC-4D49-B8EB-0B7737FBC431}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CFB9D69F-EEEC-4D49-B8EB-0B7737FBC431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB9D69F-EEEC-4D49-B8EB-0B7737FBC431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB9D69F-EEEC-4D49-B8EB-0B7737FBC431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB9D69F-EEEC-4D49-B8EB-0B7737FBC431}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {95306FB0-17D4-452C-968D-D235A6766423}
+	EndGlobalSection
+EndGlobal

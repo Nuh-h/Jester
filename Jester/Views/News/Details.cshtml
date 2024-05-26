@@ -1,0 +1,51 @@
+﻿@model Jester.Models.NewsItem
+
+@{
+    ViewData["Title"] = "Details";
+    ViewData["CurrentNavigationPage"] = "Details";
+
+}
+
+<div class="text-center p-8 my-4">
+    <h1 class="text-4xl">
+        @if (Model.IsSponsored)
+        {
+            <span class="bg-blue-800 text-white rounded p-1 py-0 mt-1">AD</span>
+        }
+        @Model.Title
+    </h1>
+</div>
+<div class="flex flex-col gap-8 m-4 text-lg">
+    <div class="rounded flex gap-2 items-center align-self-center -m-2">
+        <div>
+            <a href="/authors/@Model.Author" class="font-bold">@Model.Author</a>
+        </div>
+        <span class="w-1 h-1 rounded-full bg-[#0d6efd]"></span>
+        <date>@Model.DatePublished.ToString("dd/MM/yyyy")</date>
+    </div>
+    <hr width="100" class="self-center"/>
+    <div class="flex flex-col gap-8 m-4 text-lg">
+        @if (!String.IsNullOrWhiteSpace(Model.Story))
+    {
+        @Html.Raw(Model.Story)
+    }
+    else
+    {
+        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ipsum tellus. Curabitur aliquet nulla eu nunc faucibus, aliquam mattis eros fermentum. Fusce maximus felis vehicula, rhoncus arcu eget, mattis odio. Etiam elementum nunc in auctor eleifend. Sed eros leo, egestas et bibendum ac, imperdiet sit amet ipsum. Proin varius ante efficitur luctus semper. Etiam id consectetur tortor, eget posuere diam. Aenean tincidunt velit laoreet lorem pellentesque semper. Proin lacinia risus felis. Proin magna eros, gravida nec ex vel, tincidunt pretium ipsum. Vestibulum eu pretium lorem. Fusce tempor quis nibh id ullamcorper. Donec porttitor vulputate mi, vel pellentesque lacus lacinia eu. In nec quam nisi. Nam vehicula mauris sit amet leo interdum dapibus.</p>
+
+        <p>Nulla ut vestibulum lorem. Proin auctor ex mauris. Duis ac sodales neque. Sed ut pharetra elit. Curabitur non lacus at nibh sollicitudin tincidunt a non est. Suspendisse non arcu libero. Pellentesque facilisis odio a tortor aliquam sagittis. Maecenas consequat tincidunt fringilla. Nullam nunc dolor, vehicula sit amet eros at, gravida tincidunt eros.</p>
+
+        <p>Suspendisse feugiat malesuada lacus. Aenean accumsan metus nisl, sit amet tristique turpis tincidunt quis. Morbi in dictum justo. Vivamus et lacinia tortor, nec sollicitudin dolor. Vestibulum congue mauris nulla, at feugiat neque lacinia quis. Duis sed efficitur odio. Sed massa lectus, feugiat nec dolor luctus, dictum viverra dui. Cras eleifend tempus tincidunt. Fusce velit lectus, vulputate nec egestas id, pulvinar eu lectus. Vestibulum non ipsum a nulla fermentum mollis eget vel neque. Ut imperdiet nisl nibh, porttitor accumsan nisl porta a.</p>
+
+        <p>Nam pretium accumsan ex hendrerit bibendum. Vivamus et massa lorem. Aenean nec molestie nunc, vitae vestibulum turpis. Quisque eu enim sit amet odio congue ultricies vitae ut purus. Nullam porta dui vel arcu scelerisque aliquet. Praesent at tincidunt turpis. Praesent sed metus non dolor efficitur iaculis egestas sit amet lectus. Nam dictum lorem eget est mollis tristique. Aenean non metus a sapien scelerisque interdum. Sed tincidunt, leo in dictum viverra, tellus mauris rhoncus metus, non gravida purus sem sed nibh. Ut ut felis eu neque fermentum accumsan.</p>
+
+        <p>Proin eget massa vitae dui luctus varius. Donec malesuada tellus eget mi efficitur, vitae venenatis sapien imperdiet. Etiam maximus sem id dui porta rhoncus. Fusce elementum, nunc a porttitor ullamcorper, nibh eros tempor quam, a vehicula nisl lacus id ante. Sed ac commodo sem, in facilisis leo. Etiam non consequat enim. Suspendisse nec leo sed lacus sodales consectetur. Integer in lorem urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales semper tellus. Vestibulum maximus tellus vitae sagittis fermentum.</p>
+    }
+    </div>
+    <hr width="100" class="self-center"/>
+    <div>
+        <p class="m-auto relative text-xl font-bold -mb-2 p-4 pb-0 mt-2">You may also be interested in...</p>
+        <news-by-category category="@Model.Category" author="@Model.Author"></news-by-category>
+    </div>
+</div>
+

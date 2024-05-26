@@ -1,0 +1,34 @@
+﻿@model AuthorViewModel;
+
+<div class="flex flex-col gap-4 items-center p-8 my-4">
+    <img class="h-52 w-52 rounded bg-slate-50 dark:bg-slate-900" src="https://picsum.photos/256/256" alt=""/>
+    <h1 class="text-4xl tablet:text-8xl">@Model.Name</h1>
+    <div class="w-1 h-1 rounded-full bg-[#0d6efd]"></div>
+</div>
+@if(Model.Articles.Count() > 0){
+    <div class="container">
+    <h1 class="px-4 text-2xl tablet:text-4xl">Articles</h1>
+    <ul class="list-none m-0 flex gap-8 p-4 flex-wrap">
+        @foreach (var item in Model.Articles)
+        {
+            <li class="rounded flex flex-col  basis-[30%] grow gap-4 border border-2 p-2">
+                <a class="-mb-4 font-bold text-[#0d6efd]" href="/category/@item.Category">@item.Category</a>
+                <h2 class="text-xl font-bold"><a href="/news/@item.Id">@item.Title</a></h2>
+                <p class="text-base ">@item.Content</p>
+                <div class="p-2 rounded flex gap-2 items-center">
+                    <div>By <a href="/authors/@item.Author" class="font-bold">@item.Author</a></div> 
+                    <span class="w-1 h-1 rounded-full bg-[#0d6efd]"></span>
+                    <date>@item.DatePublished.ToString("dd/MM/yyyy")</date>
+                </div>
+                <div class="flex-grow"></div>
+                <ul class="list-none flex gap-2 m-0 flex-wrap">
+                    @foreach (var tag in item.Tags)
+                    {
+                        <li class="m-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-2 hover:outline"><a class="hover:text-white" href="/tags/@tag">@tag</a></li>
+                    }
+                </ul>
+            </li>
+            }
+        </ul>
+    </div>      
+}

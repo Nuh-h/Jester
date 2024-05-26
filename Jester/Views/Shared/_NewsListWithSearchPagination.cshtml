@@ -1,0 +1,23 @@
+﻿@model NewsListViewModel;
+
+@{
+    var newsIndex = 0;
+}
+@await Html.PartialAsync("_SearchForm", new SearchFormViewModel(){
+    SearchTerm = Model.SearchTerm,
+    TotalResults = Model.NewsItems.Count(),
+    Placeholder = "Search articles ...",
+    Name = "query"
+})
+@if (Model.NewsItems.Any())
+{
+    @await Html.PartialAsync("_NewsList", Model);
+
+    @await Html.PartialAsync("_Pagination", new PaginationViewModel(){
+        AriaLabel = "Pagination for news list",
+        AriaControls = "news-list",
+        PageIndex = Model.CurrentPage,
+        PageCount = Model.TotalPages,
+        PageSize = Model.PageSize
+    })
+}

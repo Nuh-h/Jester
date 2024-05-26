@@ -1,0 +1,18 @@
+﻿@model List<string>;
+
+<div class="text-center p-8 my-4">
+    <h1 class="text-8xl">Legendary contributors</h1>
+    <p class="text-4xl">big and small</p>
+</div>
+@if(Model.Count > 0){
+    <ul class="flex flex-wrap list-none gap-3 w-full p-4">
+        @foreach(var item in Model)
+        {
+            <li class="basis-1/@(new Random().Next(3, 6)) p-2 border rounded flex gap-2 grow items-center bg-gradient-to-r from-transparent to-blue-100">
+                <img class="h-12 w-12 flex-none rounded-full bg-slate-50 dark:bg-slate-900" src="https://picsum.photos/256/256?i=@(item)" alt="">
+                <a href="/authors/@item" class="font-bold text-[#0d6efd]">@item</a>
+            </li>
+        }
+    </ul>
+
+}

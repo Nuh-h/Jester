@@ -1,0 +1,22 @@
+﻿@model NewsListViewModel;
+@{
+    ViewData["Title"] = "Home";
+    ViewData["CurrentNavigationPage"] = "Home";
+}
+
+<div class="text-center p-8 my-4">
+    <h1 class="text-8xl">Welcome to Jester's</h1>
+    <p class="text-4xl">Unmissable news of the century</p>
+</div>
+
+<div>
+    @{
+        var model = Model.NewsItems.Take(5).ToList();
+        Model.NewsItems = model;
+    }
+    @await Html.PartialAsync("_NewsList", Model)
+
+    <div class="flex justify-center">
+        <a class="block border-2 border-solid border-blue-600 hover:bg-blue-600 text-blue-600 hover:text-white text-lg px-4 py-2 rounded mx-4 mt-4 w-max" href="/News">See all</a>
+    </div>
+</div>
