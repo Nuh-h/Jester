@@ -45,7 +45,7 @@
     <hr width="100" class="self-center"/>
     <div>
         <p class="m-auto relative text-xl font-bold -mb-2 p-4 pb-0 mt-2">You may also be interested in...</p>
-        <news-by-category category="@Model.Category" author="@Model.Author"></news-by-category>
+        @await Component.InvokeAsync("NewsByCategory", new {CurrentId = Model.Id, Category = Model.Category, Author = Model.Author, NoResultsText = "None found" })
     </div>
 </div>
 

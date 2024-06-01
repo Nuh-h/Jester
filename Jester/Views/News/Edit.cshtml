@@ -6,58 +6,50 @@
 
 }
 
-<h1>Edit</h1>
-
-<h4>NewsItem</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<div class="text-center p-8 my-4">
+    <h1 class="text-4xl capitalize">Edit</h1>
+</div>
+<div>
+        <form asp-action="Edit" class="flex flex-wrap gap-3 justify-center">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
+            <div class="basis-1/3">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="basis-1/3">
                 <label asp-for="Content" class="control-label"></label>
                 <input asp-for="Content" class="form-control" />
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="basis-1/3">
                 <label asp-for="Category" class="control-label"></label>
                 <input asp-for="Category" class="form-control" />
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="basis-1/3">
                 <label asp-for="DatePublished" class="control-label"></label>
                 <input asp-for="DatePublished" class="form-control" />
                 <span asp-validation-for="DatePublished" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="basis-1/3">
                 <label asp-for="Author" class="control-label"></label>
                 <input asp-for="Author" class="form-control" />
                 <span asp-validation-for="Author" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
+            <div class="basis-1/3">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsSponsored" /> @Html.DisplayNameFor(model => model.IsSponsored)
                 </label>
             </div>
-            <div class="form-group">
+            <div class="basis-1/3">
                 <label asp-for="Tags" class="control-label"></label>
-                <input asp-for="Tags" class="form-control" />
+                <input asp-for="Tags" class="form-control" value="@String.Join(",",Model.Tags)"/>
                 <span asp-validation-for="Tags" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="basis-1/3">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
-    </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

@@ -63,16 +63,20 @@ namespace Jester.Services
             }
         }
 
-        public async Task<List<NewsItem>> GetNewsItemsByCategoryAsync(string category)
+        public async Task<List<NewsItem>> GetNewsItemsByCategoryAsync(string category, int? currentId)
         {
-            return (await _newsRepository.GetAllAsync()).FindAll(x => x.Category == category);
+            return (await _newsRepository.GetAllAsync()).Where(x => x.Category.ToLower() == category.ToLower() && x.Id != currentId).ToList();
         }
 
         public async Task<List<NewsItem>> GetNewsItemsByAuthorAsync(string author)
         {
-            return (await _newsRepository.GetAllAsync()).FindAll(x => x.Author == author);
+            return (await _newsRepository.GetAllAsync()).FindAll(x => x.Author.ToLower() == author.ToLower());
         }
-
+        
+        public async Task<List<NewsItem>> GetNewsItemsByTagAsync(string tag)
+        {
+            return (await _newsRepository.GetAllAsync()).FindAll(x => x.Tags.Select(y => y.ToLower()).Contains(tag.ToLower()));
+        }
         public async Task<List<string>> GetNewsAuthorsAsync()
         {
             return (await _newsRepository.GetAllAsync()).Select(x => x.Author).ToList();

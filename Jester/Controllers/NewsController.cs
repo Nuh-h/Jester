@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Jester.Models;
 using Jester.Services;
@@ -59,38 +54,64 @@ namespace Jester.Controllers
                 return View(newsItem);
             }
         }
-    /*
-        // GET: NewsItems/Create
+
+        [HttpGet]
+        [Route("/category/{category}")]
+        public async Task<IActionResult> Category(string category)
+        {
+            var model = new Dictionary<string, string>();
+            model["Category"] = category;
+
+            // ViewComponent inside View will handle fetching all articles matching this category
+            return View(model);
+        }
+
+        [HttpGet]
+        [Route("/tags/{tag}")]
+        public async Task<IActionResult> Tags(string tag)
+        {
+            var model = new Dictionary<string, string>();
+            model["Tag"] = tag;
+
+            // ViewComponent inside View will handle fetching all articles matching this tag
+            return View(model);
+        }
+         
+        // GET: News/Create
+        [Route("/News/Create")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: NewsItems/Create
+        // POST: News/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Route("/News/Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,Category,DatePublished,Author,IsSponsored,Tags")] NewsItem newsItem)
+        public async Task<IActionResult> Create([Bind("Id,Title,Content,Category,DatePublished,Author,IsSponsored,Story")] NewsItem newsItem, string Tags)
         {
             if (ModelState.IsValid)
             {
-                _newsService.Add(newsItem);
-                await _newsService.SaveChangesAsync();
+                newsItem.Tags = Tags.Split(",");
+                //newsItem.Story = Story;
+
+                await _newsService.CreateNewsItemAsync(newsItem);
                 return RedirectToAction(nameof(Index));
             }
             return View(newsItem);
         }
 
-        // GET: NewsItems/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: News/Edit/5
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _newsService.NewsItems == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var newsItem = await _newsService.NewsItems.FindAsync(id);
+            var newsItem = await _newsService.GetNewsItemByIdAsync(id);
             if (newsItem == null)
             {
                 return NotFound();
@@ -98,12 +119,12 @@ namespace Jester.Controllers
             return View(newsItem);
         }
 
-        // POST: NewsItems/Edit/5
+        // POST: News/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,Category,DatePublished,Author,IsSponsored,Tags")] NewsItem newsItem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,Category,DatePublished,Author,IsSponsored")] NewsItem newsItem, string Tags)
         {
             if (id != newsItem.Id)
             {
@@ -112,14 +133,15 @@ namespace Jester.Controllers
 
             if (ModelState.IsValid)
             {
+                newsItem.Tags = Tags.Split(",");
+
                 try
                 {
-                    _newsService.Update(newsItem);
-                    await _newsService.SaveChangesAsync();
+                    await _newsService.UpdateNewsItemAsync(newsItem);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NewsItemExists(newsItem.Id))
+                    if (! (await NewsItemExists(newsItem.Id)))
                     {
                         return NotFound();
                     }
@@ -133,16 +155,15 @@ namespace Jester.Controllers
             return View(newsItem);
         }
 
-        // GET: NewsItems/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: News/Delete/5
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _newsService.NewsItems == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var newsItem = await _newsService.NewsItems
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var newsItem = await _newsService.GetNewsItemByIdAsync(id);
             if (newsItem == null)
             {
                 return NotFound();
@@ -151,7 +172,7 @@ namespace Jester.Controllers
             return View(newsItem);
         }
 
-        // POST: NewsItems/Delete/5
+        // POST: News/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -160,19 +181,18 @@ namespace Jester.Controllers
             {
                 return Problem("Entity set 'NewsContext'  is null.");
             }
-            var newsItem = await _newsService.FindAsync(id);
+            var newsItem = await _newsService.GetNewsItemByIdAsync(id);
             if (newsItem != null)
             {
-                _newsService.Remove(newsItem);
+                await _newsService.DeleteNewsItemAsync(id);
             }
 
-            await _newsService.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool NewsItemExists(int id)
+        private async Task<bool> NewsItemExists(int id)
         {
-            return (_newsService.NewsItems?.Any(e => e.Id == id)).GetValueOrDefault();
-        }*/
+            return (await _newsService.GetNewsItemByIdAsync(id)) != null;
+        }
     }
 }

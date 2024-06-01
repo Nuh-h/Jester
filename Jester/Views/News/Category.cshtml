@@ -1,0 +1,12 @@
+﻿@model Dictionary<string, string>;
+@{
+    var category = @Model["Category"];
+    ViewData["Title"] = category;
+}
+
+<div class="text-center p-8 my-4">
+    <h1 class="text-4xl capitalize">@category</h1>
+</div>
+<div>
+    @await Component.InvokeAsync("NewsByCategory", new { Category = category, NoResultsText = "No matches found"})
+</div>

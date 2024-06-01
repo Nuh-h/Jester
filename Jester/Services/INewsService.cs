@@ -12,7 +12,8 @@ namespace Jester.Services
 
         Task<NewsListViewModel> SearchAndPaginateAsync(string searchTerm, int page, int pageSize);
 
-        Task<List<NewsItem>> GetNewsItemsByCategoryAsync(string category);
+        Task<List<NewsItem>> GetNewsItemsByCategoryAsync(string category, int? currentId);
+        Task<List<NewsItem>> GetNewsItemsByTagAsync(string tag);
         Task<List<NewsItem>> GetNewsItemsByAuthorAsync(string category);
         Task<List<string>> GetNewsAuthorsAsync();
 

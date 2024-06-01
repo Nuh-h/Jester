@@ -1,0 +1,12 @@
+﻿@model Dictionary<string, string>;
+@{
+    var tag = @Model["Tag"];
+    ViewData["Title"] = tag;
+}
+
+<div class="text-center p-8 my-4">
+    <h1 class="text-4xl capitalize">@tag</h1>
+</div>
+<div>
+    <vc:news-by-tag tag="@tag" no-results-text="No matches found"></vc:news-by-tag>
+</div>

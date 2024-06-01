@@ -1,9 +1,4 @@
-﻿//using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -21,7 +16,7 @@ namespace Jester.Models
 
         [Required]
         public string Content { get; set; }
-
+        
         public string? Story { get; set; }
 
         [Required]
@@ -43,6 +38,7 @@ namespace Jester.Models
         {
             DatePublished = DateTime.UtcNow;  //Initialize with the current UTC time
             Story = "";
+            Tags = new string[] {};
         }
     }
 

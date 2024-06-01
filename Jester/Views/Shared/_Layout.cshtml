@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Jester</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Jester.styles.css" asp-append-version="true" />
     @await Html.PartialAsync("_Favicons")
@@ -25,12 +25,12 @@
                         <div  class="hidden sm:ml-6 sm:block">
                             <div  class="flex space-x-4">
                                 @{
-                                    var activePageClasses = "bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium";
-                                    var nonActivePageClasses = "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium";
+                                    var activePageClasses = "bg-[#0d6efd] text-white rounded-md px-3 py-2 text-sm font-medium";
+                                    var nonActivePageClasses = "text-gray-300 hover:bg-[#0d6efd]/90 hover:text-white rounded-md px-3 py-2 text-sm font-medium";
                                 }
                                 <a  href="/" class="@(ViewData["CurrentNavigationPage"]=="Home" ? activePageClasses : nonActivePageClasses)" aria-current="@(ViewData["CurrentNavigationPage"]=="Home" ? "page":null)">Home</a>
                                 <a  href="/News" class="@(ViewData["CurrentNavigationPage"]=="All" ? activePageClasses : nonActivePageClasses)" aria-current="@(ViewData["CurrentNavigationPage"]=="All" ? "page":null)">All news</a>
-                                <a  href="/News/Create" class="@(ViewData["CurrentNavigationPage"]=="Create" ? activePageClasses : nonActivePageClasses)" aria-current="@(ViewData["CurrentNavigationPage"]=="Create" ? "page":null)">Create news</a>
+                                <a  href="/News/Create" class="@(ViewData["CurrentNavigationPage"]=="Create" ? activePageClasses : nonActivePageClasses)" aria-current="@(ViewData["CurrentNavigationPage"]=="Create" ? "page":null)">Add your own</a>
                             </div>
                         </div>
                     </div>
@@ -42,9 +42,13 @@
             <div  class="sm:hidden" id="mobile-menu">
                 <div  class="space-y-1 px-2 pb-3 pt-2">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a  href="/" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Home</a>
-                    <a  href="/NewsItems" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">All news</a>
-                    <a  href="/NewsItems/Create" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Create</a>
+                    @{
+                                    var activeMobilePageClasses = "bg-[#0d6efd]/90 text-white block rounded-md px-3 py-2 text-base font-medium";
+                                    var nonActiveMobilePageClasses = "text-gray-300 hover:bg-[#0d6efd]/90 hover:text-white block rounded-md px-3 py-2 text-base font-medium";
+                                }
+                    <a  href="/" class="@(ViewData["CurrentNavigationPage"]=="Home" ? activeMobilePageClasses : nonActiveMobilePageClasses)" aria-current="@(ViewData["CurrentNavigationPage"]=="Home" ? "page":null)">Home</a>
+                    <a  href="/News" class="@(ViewData["CurrentNavigationPage"]=="All" ? activeMobilePageClasses : nonActiveMobilePageClasses)" aria-current="@(ViewData["CurrentNavigationPage"]=="All" ? "page":null)">All news</a>
+                    <a  href="/News/Create" class="@(ViewData["CurrentNavigationPage"]=="Create" ? activeMobilePageClasses : nonActiveMobilePageClasses)" aria-current="@(ViewData["CurrentNavigationPage"]=="Create" ? "page":null)">Create</a>
                 </div>
             </div>
         </nav>

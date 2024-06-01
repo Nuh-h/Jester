@@ -1,4 +1,5 @@
-﻿using Jester.Services;
+﻿using Jester.Models;
+using Jester.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jester.ViewComponents
@@ -10,15 +11,18 @@ namespace Jester.ViewComponents
         {
             _newsService = newsService;
         }
-        public async Task<IViewComponentResult> InvokeAsync(string category, string? author)
+        public async Task<IViewComponentResult> InvokeAsync(string category, int? currentId, string? noResultsText, string? author)
         {
-            var newsItemsByCategory = await _newsService.GetNewsItemsByCategoryAsync(category);
+
+            var newsItemsByCategory = await _newsService.GetNewsItemsByCategoryAsync(category, currentId);
+
             if(newsItemsByCategory == null && !String.IsNullOrWhiteSpace(author))
             {
                 var newsItemsByAuthor = await _newsService.GetNewsItemsByAuthorAsync(author);
-                return View(newsItemsByAuthor);
+                return View(new FilteredBlockViewModel() { NoResultsText = noResultsText, Items = newsItemsByAuthor});
             }
-            return View(newsItemsByCategory);
+
+            return View(new FilteredBlockViewModel() { NoResultsText = noResultsText, Items = newsItemsByCategory});
         }
     }
 }
