@@ -19,5 +19,6 @@ RUN dotnet publish "Jester.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY Jester/sample-news.json ./sample-news.json
 
 ENTRYPOINT ["dotnet", "Jester.dll"]
