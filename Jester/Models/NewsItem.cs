@@ -38,7 +38,7 @@ namespace Jester.Models
         {
             DatePublished = DateTime.UtcNow;  //Initialize with the current UTC time
             Story = "";
-            Tags = new string[] {};
+            Tags = Array.Empty<string>();
         }
     }
 

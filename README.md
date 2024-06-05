@@ -22,7 +22,7 @@ This is an ASP.NET Core project, you'll need .NET SDK at a minimum, and optional
 
 You can clone the repo as usual but you will need a `postgreSQL` instance running. You can update credential details on `appsettings.{environment}.json` files. I recommend using docker for installing the db, just make sure you expose to the same network as the app (usually, your host machine).
 
-Feel free to swap out PostgresSQL for other ORMs that EF Core supports.
+Feel free to swap out PostgresSQL for other DBs that EF Core supports.
 
 ## Features
 
@@ -64,7 +64,6 @@ Feel free to swap out PostgresSQL for other ORMs that EF Core supports.
 - [x] Test Supabase connection
 - [x] Generate Railway domain
 - [ ] App is live 🚀
-        
     - [x] Fix issue with port (fixed by adding PORT var to railway)
     - [x] Fix issue with connection string (fixed by correcting env var name on railway)
     - [ ] Fix issue with seeding file not being available on the prod workdir
