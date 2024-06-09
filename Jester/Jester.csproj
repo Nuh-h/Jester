@@ -24,10 +24,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
-  <Target Name="BuildFrontend" BeforeTargets="Build">
-	<Exec WorkingDirectory="$(ProjectDir)UI" Command="npm run build" />
-  </Target>
-
   <ItemGroup>
     <Content Update="sample-news.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -39,5 +35,10 @@
     <Folder Include="UI\scss\" />
     <Folder Include="UI\ts\" />
   </ItemGroup>
+  
+  <Target Name="BuildFrontend" BeforeTargets="Build">
+    <Exec WorkingDirectory="$(ProjectDir)UI" Command="npm ci" />
+    <Exec WorkingDirectory="$(ProjectDir)UI" Command="npm run build" />
+  </Target>
 
 </Project>
