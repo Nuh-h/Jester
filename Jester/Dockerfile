@@ -10,6 +10,8 @@ WORKDIR /src
 COPY ["Jester/Jester.csproj", "Jester/"]
 RUN dotnet restore "Jester/Jester.csproj"
 COPY . .
+COPY Jester/Jester/sample-news.json ./Jester/Jester/sample-news.json
+
 WORKDIR "/src/Jester"
 RUN dotnet build "Jester.csproj" -c Release -o /app/build
 
@@ -19,6 +21,5 @@ RUN dotnet publish "Jester.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY Jester/sample-news.json ./sample-news.json
 
 ENTRYPOINT ["dotnet", "Jester.dll"]
