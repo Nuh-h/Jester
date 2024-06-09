@@ -24,7 +24,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection(); // Disabling as host seems to enforce and terminate ssl
 app.UseStaticFiles();
 
 app.UseRouting();
