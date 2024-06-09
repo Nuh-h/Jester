@@ -59,8 +59,10 @@ namespace Jester.Controllers
         [Route("/category/{category}")]
         public async Task<IActionResult> Category(string category)
         {
-            var model = new Dictionary<string, string>();
-            model["Category"] = category;
+            var model = new Dictionary<string, string>
+            {
+                ["Category"] = category
+            };
 
             // ViewComponent inside View will handle fetching all articles matching this category
             return View(model);
@@ -70,8 +72,10 @@ namespace Jester.Controllers
         [Route("/tags/{tag}")]
         public async Task<IActionResult> Tags(string tag)
         {
-            var model = new Dictionary<string, string>();
-            model["Tag"] = tag;
+            var model = new Dictionary<string, string>
+            {
+                ["Tag"] = tag
+            };
 
             // ViewComponent inside View will handle fetching all articles matching this tag
             return View(model);

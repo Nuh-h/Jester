@@ -34,11 +34,9 @@
     <Folder Include="UI\assets\" />
     <Folder Include="UI\scss\" />
     <Folder Include="UI\ts\" />
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
   
-  <Target Name="BuildFrontend" BeforeTargets="Build">
-    <Exec WorkingDirectory="$(ProjectDir)UI" Command="npm ci" />
-    <Exec WorkingDirectory="$(ProjectDir)UI" Command="npm run build" />
-  </Target>
 
 </Project>
