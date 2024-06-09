@@ -67,4 +67,22 @@ Feel free to swap out PostgresSQL for other DBs that EF Core supports.
     - [x] Fix issue with port (fixed by adding PORT var to railway)
     - [x] Fix issue with connection string (fixed by correcting env var name on railway)
     - [ ] Fix issue with seeding file not being available on the prod workdir
+        - Struggled to resolve. I tried to recreate locally with environment set to prod. nada. I tried it in docker. nada. I tried on another platform. It had issues with ssl, but never complained about file not being found. Burnt enough time on it - will be moving to building more features before I return to it (with possibly professional help)
 
+## Other things
+
+### Updating DB through EF Core
+You should be at the content root where all source code is i.e. Jester/Jester
+
+1. Add a migration with a `MigrationName` of your own
+    ```
+    dotnet ef migrations add MigrationName
+    ```
+1. Update database with the new migration you created
+    ```
+    dotnet ef database update
+    ```
+1. To remove the last migration
+    ```
+    dotnet ef migrations remove
+    ```
