@@ -13,6 +13,7 @@ COPY . ./Jester
 
 WORKDIR "/src/Jester"
 RUN dotnet build "Jester.csproj" -c Release -o /app/build
+RUN dotnet dev-certs https
 
 ## Node Build Stage
 FROM node:lts-alpine AS node_build
@@ -36,5 +37,6 @@ COPY --from=node_build /frontend/wwwroot /app/publish/wwwroot
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY --from=build /root/.dotnet/corefx/cryptography/x509stores/my/* /root/.dotnet/corefx/cryptography/x509stores/my/
 
 ENTRYPOINT ["dotnet", "Jester.dll"]
