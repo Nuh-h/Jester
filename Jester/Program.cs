@@ -1,12 +1,16 @@
+using HealthChecks.UI.Client;
 using Jester.DAL.NewsRepository;
 using Jester.Data;
 using Jester.Models;
 using Jester.Services;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHealthChecks();
+    //.AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")); //Disabling as it could keep DB awake, will require further work
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<NewsContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -24,10 +28,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-//app.UseHttpsRedirection(); // Disabling as host seems to enforce and terminate ssl
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.MapHealthChecks("/healthcheck", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.UseAuthorization();
 
