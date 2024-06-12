@@ -94,12 +94,11 @@ namespace Jester.Controllers
         [HttpPost]
         [Route("/News/Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,Category,DatePublished,Author,IsSponsored,Story")] NewsItem newsItem, string Tags)
+        public async Task<IActionResult> Create([Bind("Title,Content,Category,DatePublished,IsSponsored,Story")] NewsItem newsItem, string Tags)
         {
             if (ModelState.IsValid)
             {
                 newsItem.Tags = Tags.Split(",");
-                //newsItem.Story = Story;
 
                 await _newsService.CreateNewsItemAsync(newsItem);
                 return RedirectToAction(nameof(Index));

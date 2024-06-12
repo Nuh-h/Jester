@@ -39,6 +39,7 @@ namespace Jester.Models
             DatePublished = DateTime.UtcNow;  //Initialize with the current UTC time
             Story = "";
             Tags = Array.Empty<string>();
+            Author = "Jester Doe";
         }
     }
 

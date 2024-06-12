@@ -24,6 +24,22 @@ You can clone the repo as usual but you will need a `postgreSQL` instance runnin
 
 Feel free to swap out PostgresSQL for other DBs that EF Core supports.
 
+## Updating DB through EF Core
+You should be at the content root where all source code is i.e. Jester/Jester
+
+1. Add a migration with a `MigrationName` of your own
+    ```
+    dotnet ef migrations add MigrationName
+    ```
+1. Update database with the new migration you created
+    ```
+    dotnet ef database update
+    ```
+1. To remove the last migration
+    ```
+    dotnet ef migrations remove
+    ```
+
 ## Features
 
 - [x] Getting data and showing all
@@ -33,13 +49,13 @@ Feel free to swap out PostgresSQL for other DBs that EF Core supports.
 - [x] Content pages (to read full)
 - [x] Adding "related articles" view component (delightful!) Learn about adding TagHelpers! +1
 - [x] Dockerise so it can be deployed to _free_ hosts other than Azure
-- [ ] Connecting to other docker a pain unless you can provide server ip directly (fine in prod as can be injected via env vars)
+- [x] Connecting to other docker a pain unless you can provide server ip directly (fine in prod as can be injected via env vars)
 - [x] Update pagination count
-- [ ] Setup tailwindcss
 - [x] Update pagination UI
 - [x] Extend view component to accept author and maybe other tags
+- [x] Setup tailwindcss
+- [x] Set up WYSIWYG editor page for each article
 - [ ] When editing / creating, enable option to dump json in one go
-- [ ] Set up WYSIWYG editor page for each article
 - [ ] Reactions
 - [ ] Filtering results
 - [ ] Restful API endpoints
@@ -63,26 +79,10 @@ Feel free to swap out PostgresSQL for other DBs that EF Core supports.
 - [x] Let Railway do its thing
 - [x] Test Supabase connection
 - [x] Generate Railway domain
-- [ ] App is live 🚀
+- [x] App is live 🚀
     - [x] Fix issue with port (fixed by adding PORT var to railway)
     - [x] Fix issue with connection string (fixed by correcting env var name on railway)
-    - [ ] Fix issue with seeding file not being available on the prod workdir
-        - Struggled to resolve. I tried to recreate locally with environment set to prod. nada. I tried it in docker. nada. I tried on another platform. It had issues with ssl, but never complained about file not being found. Burnt enough time on it - will be moving to building more features before I return to it (with possibly professional help)
+    - [x] Fix issue with seeding file not being available on the prod workdir
+        - ~~Struggled to resolve. I tried to recreate locally with environment set to prod. nada. I tried it in docker. nada. I tried on another platform. It had issues with ssl, but never complained about file not being found. Burnt enough time on it - will be moving to building more features before I return to it (with possibly professional help)~~ Had to cleanup and correct Dockerfile
+    - [x] Deploy to host with dev-cert 🚀
 
-## Other things
-
-### Updating DB through EF Core
-You should be at the content root where all source code is i.e. Jester/Jester
-
-1. Add a migration with a `MigrationName` of your own
-    ```
-    dotnet ef migrations add MigrationName
-    ```
-1. Update database with the new migration you created
-    ```
-    dotnet ef database update
-    ```
-1. To remove the last migration
-    ```
-    dotnet ef migrations remove
-    ```

@@ -28,7 +28,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection(); //TODO: needs re-enabling at the right time
 app.UseStaticFiles();
 
 app.UseRouting();

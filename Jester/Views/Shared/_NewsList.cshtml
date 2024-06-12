@@ -7,7 +7,7 @@
     <ul class="list-none m-0 flex gap-8 p-4 flex-wrap">
         @foreach (var item in Model.NewsItems)
         {
-            <li class="rounded flex flex-col @(newsIndex > 0 ? "basis-[30%]" : "basis-[64%]") grow gap-4 border border-2 p-2">
+            <li class="rounded flex flex-col @(newsIndex > 0 ? "md:basis-[30%]" : "md:basis-[64%]") grow gap-4 border border-2 p-2">
                 <a class="-mb-4 font-bold text-[#0d6efd]" href="/category/@item.Category">@item.Category</a>
                 <h2 class="text-xl font-bold"><a href="/news/@item.Id">@item.Title</a></h2>
                 <p class="text-base ">@item.Content</p>

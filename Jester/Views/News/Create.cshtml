@@ -6,53 +6,75 @@
 }
 
 <div class="text-center p-8 my-4">
-    <h1 class="text-8xl">Add your own</h1>
+    <h1 class="text-6xl">Add your own</h1>
 </div>
-<div class="flex items-center justify-center">
-        <form asp-action="Create" class="flex flex-col gap-3 min-w-[50%]">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="basis-1/2">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+<div class="flex p-4 m-4">
+    <form asp-action="Create" class="w-full">
+        <div asp-validation-summary="ModelOnly"></div>
+        <style>
+            label {
+                font-weight: bold;
+            }
+            input, textarea {
+                background: #13283614;
+                padding: 0.5em;
+                border-radius: 0.5em;
+                width: 100%;
+            }
+            input::placeholder {
+            }
+        </style>
+        <div class="border border-solid my-4 p-4 shadow rounded flex flex-wrap gap-2">
+            <div class="flex-grow">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" placeholder="The fastest cruiseship to traverse the globe..." />
+                <span asp-validation-for="Title"></span>
             </div>
-            <div class="basis-1/2">
-                <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
-                <span asp-validation-for="Content" class="text-danger"></span>
+
+            <div class="flex-grow">
+                <label asp-for="Category"></label>
+                <input asp-for="Category" placeholder="Travel" />
+                <span asp-validation-for="Category"></span>
             </div>
-            <div class="basis-1/2">
-                <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <span asp-validation-for="Category" class="text-danger"></span>
+            <div class="flex-grow">
+                <label asp-for="DatePublished"></label>
+                <input asp-for="DatePublished" />
+                <span asp-validation-for="DatePublished"></span>
             </div>
-            <div class="basis-1/2">
-                <label asp-for="DatePublished" class="control-label"></label>
-                <input asp-for="DatePublished" class="form-control" />
-                <span asp-validation-for="DatePublished" class="text-danger"></span>
+            @*<div>
+                <label asp-for="Author"></label>
+                <input asp-for="Author" />
+                <span asp-validation-for="Author"></span>
+            </div>*@
+            
+            <div class="flex-grow">
+                <label asp-for="Tags"></label>
+                <input asp-for="Tags" placeholder="Cruise, Ocean, Journey"/>
+                <span asp-validation-for="Tags"></span>
             </div>
-            <div class="basis-1/2">
-                <label asp-for="Author" class="control-label"></label>
-                <input asp-for="Author" class="form-control" />
-                <span asp-validation-for="Author" class="text-danger"></span>
-            </div>
-            <div class="basis-1/2 form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsSponsored" /> @Html.DisplayNameFor(model => model.IsSponsored)
+            <div class="grid">
+                <label>
+                    Sponsored
                 </label>
+                 <input asp-for="IsSponsored" type="checkbox" class="w-6 h-6"/> 
             </div>
-            <div class="basis-1/2">
-                <label asp-for="Tags" class="control-label"></label>
-                <input asp-for="Tags" class="form-control" />
-                <span asp-validation-for="Tags" class="text-danger"></span>
-            </div>
-            <div class="basis-1/2">
-                <label asp-for="Story" class="control-label"></label>
-                <textarea asp-for="Story" class="form-control"></textarea>
-                <span asp-validation-for="Story" class="text-danger"></span>
-            </div>
-            <div class="basis-1/2">
-                <input type="submit" value="Create" class="px-4 py-2 font-semibold text-sm bg-[#0d6efd] text-white rounded shadow-sm" />
-            </div>
-        </form>
+        </div>
+        <div class="border border-solid my-4 p-4 shadow rounded">
+        <div>
+            <label asp-for="Content">Description</label>
+            <input asp-for="Content" placeholder="Snippet / description ..."/>
+            <span asp-validation-for="Content"></span>
+        </div>
+        </div>
+        <div class="border border-solid my-4 p-4 shadow rounded">
+        <div>
+            <label asp-for="Story"></label>
+            <textarea id="story" asp-for="Story" rows="15" cols="15"></textarea>
+            <span asp-validation-for="Story"></span>
+        </div>
+        </div>
+        <div>
+            <input type="submit" value="Create" class="px-4 py-2 font-semibold text-sm bg-[#0d6efd] text-white rounded shadow-sm" />
+        </div>
+    </form>
 </div>

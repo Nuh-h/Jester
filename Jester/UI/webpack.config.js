@@ -19,17 +19,7 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                plugins: [
-                                    require('tailwindcss')('./tailwind.config.js'),
-                                    require('autoprefixer')
-                                ]
-                            }
-                        }
-                    },
+                    'postcss-loader',
                     'sass-loader'
                 ]
             }

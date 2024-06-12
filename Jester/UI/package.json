@@ -5,6 +5,8 @@
     "build": "gulp"
   },
   "dependencies": {
+    "recursive-copy": "^2.0.14",
+    "tinymce": "^7.1.2",
     "typescript": "^5.4.5"
   },
   "devDependencies": {
