@@ -2,17 +2,17 @@
 
 <div class="flex flex-col gap-4 items-center p-8 my-4">
     <img class="h-52 w-52 rounded bg-slate-50 dark:bg-slate-900" src="https://picsum.photos/256/256" alt="" />
-    <h1 class="text-4xl tablet:text-8xl">@Model.Name</h1>
+    <h1 class="text-4xl md:text-6xl text-center">@Model.Name</h1>
     <div class="w-1 h-1 rounded-full bg-[#0d6efd]"></div>
 </div>
 @if (Model.Articles.Count() > 0)
 {
     <div class="container">
-        <h1 class="px-4 text-2xl tablet:text-4xl">Articles</h1>
+        <h1 class="px-4 text-2xl md:text-4xl">Articles</h1>
         <ul class="list-none m-0 flex gap-8 p-4 flex-wrap">
             @foreach (var item in Model.Articles)
             {
-                <li class="rounded flex flex-col  basis-[30%] grow gap-4 border border-2 p-2">
+                <li class="rounded flex flex-col  md:basis-[30%] grow gap-4 border border-2 p-2">
                     <a class="-mb-4 font-bold text-[#0d6efd]" href="/category/@item.Category">@item.Category</a>
                     <h2 class="text-xl font-bold"><a href="/news/@item.Id">@item.Title</a></h2>
                     <p class="text-base ">@item.Content</p>

@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     "**/*.ts",
-    "./../**/*.cshtml"
+    "../**/*.cshtml"
   ],
   theme: {
     container: {

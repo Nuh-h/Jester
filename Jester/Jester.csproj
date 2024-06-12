@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="UI\ts\editor.ts" />
+    <None Remove="UI\ts\mobile-menu.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="6.0.2" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.29">
@@ -35,9 +40,15 @@
   <ItemGroup>
     <Folder Include="UI\assets\" />
     <Folder Include="UI\scss\" />
-    <Folder Include="UI\ts\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\js\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="UI\ts\editor.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="UI\ts\mobile-menu.ts" />
   </ItemGroup>
   
 

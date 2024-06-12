@@ -6,7 +6,15 @@ const webpackConfig = require('./webpack.config.js');
 const postcss = require('gulp-postcss');
 const tailwindcss = require('tailwindcss');
 const autoprefixer = require('autoprefixer');
-const concat = require("gulp-concat"); 
+const concat = require("gulp-concat");
+
+const fs = require("fs");
+const copy = require("recursive-copy");
+
+const copyTinyMce = () => copy("./node_modules/tinymce/","../wwwroot/js/tinymce")
+    .then(result => console.log(`TinyMCE Copy: Successfully copied ${result.length} files`))
+    .catch(console.error);
+
 
 // Compile SCSS to CSS
 gulp.task('sass', function () {
@@ -25,6 +33,25 @@ gulp.task('sass', function () {
 
 // Compile TypeScript to JavaScript using Webpack
 gulp.task('typescript', () => {
+
+    try {
+        let tinyMceFiles = fs.readdirSync("../wwwroot/js/tinymce");
+
+        if (!tinyMceFiles || !tinyMceFiles.length) {
+            console.log("TinyMce Copy: starting ...");
+            copyTinyMce();
+        }
+    }
+    catch (err) {
+        if (err.message.includes("ENOENT: no such file or directory")) {
+            console.log("TinyMce Copy: starting ...");
+            copyTinyMce();
+        }
+        else {
+            console.error(err);
+        }
+    }
+
     return gulp.src('ts/main.ts')
         .pipe(webpack(webpackConfig))
         .pipe(gulp.dest('../wwwroot/js'));

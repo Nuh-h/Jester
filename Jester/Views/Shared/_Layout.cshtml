@@ -12,7 +12,7 @@
         <nav  class="bg-blue-100/20">
             <div  class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div  class="relative flex h-16 py-8 items-center justify-between">
-                    <div  class="flex flex-1 items-center justify-center sm:items-center sm:justify-between">
+                    <div  class="flex flex-1 items-center justify-between sm:items-center">
                         <div  class="flex flex-shrink-0 items-center">
                             
                             <a class="text-4xl bg-gradient-to-r from-blue-600 via-purple-500 to-red-400 inline-block !text-transparent bg-clip-text w-auto" href="/">
@@ -31,15 +31,15 @@
                                 <a  href="/News/Create" class="@(ViewData["CurrentNavigationPage"]=="Create" ? activePageClasses : nonActivePageClasses)" aria-current="@(ViewData["CurrentNavigationPage"]=="Create" ? "page":null)">Add your own</a>
                             </div>
                         </div>
+                        <button id="mobile-menu-btn" aria-controls="mobile-menu" class="sm:hidden border border-2 border-solid border-[#0d6efd]/90 rounded p-2 text-[#0d6efd]/90 hover:bg-[#0d6efd]/90 hover:text-white">MENU</button>
                     </div>
 
                 </div>
             </div>
 
-            <!-- Mobile menu, show/hide based on menu state. -->
-            <div  class="sm:hidden" id="mobile-menu">
+            <!-- Mobile menu, controlled by JS (no-js alt needed) -->
+            <div  class="hidden" id="mobile-menu">
                 <div  class="space-y-1 px-2 pb-3 pt-2">
-                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                     @{
                                     var activeMobilePageClasses = "bg-[#0d6efd]/90 text-white block rounded-md px-3 py-2 text-base font-medium";
                                     var nonActiveMobilePageClasses = "text-gray-800 hover:outline hover:outline-[#0d6efd]/90 hover:outline-2 hover:text-[#0d6efd] block rounded-md px-3 py-2 text-base font-medium";
@@ -57,8 +57,8 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted w-full self-end">
-        <div class="container">
+    <footer class="container border-top pl-4 pt-4 text-gray-600">
+        <div>
             &copy; 2024 - Nuh
         </div>
     </footer>
