@@ -1,5 +1,6 @@
 ﻿using Jester.Models;
 using Jester.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jester
@@ -19,6 +20,7 @@ namespace Jester
             return View(authors);
         }
 
+        [Authorize]
         [Route("/authors/{name}")]
         public async Task<IActionResult> Profile(string name)
         {

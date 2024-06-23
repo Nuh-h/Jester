@@ -5,18 +5,23 @@ using Jester.Models;
 using Jester.Services;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
+using Jester.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+var ConnectionsString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Add services to the container.
 builder.Services.AddHealthChecks();
     //.AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")); //Disabling as it could keep DB awake, will require further work
+
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<NewsContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<NewsContext>(options => options.UseNpgsql(ConnectionsString));
+builder.Services.AddDbContext<IdentityContext>(options => options.UseNpgsql(ConnectionsString));
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<IdentityContext>();
+
 builder.Services.AddScoped<INewsRepository<NewsItem>, NewsRepository> ();
 builder.Services.AddScoped<INewsService, NewsService>();
-
 
 var app = builder.Build();
 
@@ -38,8 +43,11 @@ app.MapHealthChecks("/healthcheck", new HealthCheckOptions
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
 
+app.UseAuthentication();
 app.UseAuthorization();
 
+
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

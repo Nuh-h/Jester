@@ -11,19 +11,7 @@
 <div class="flex p-4 m-4">
     <form asp-action="Create" class="w-full">
         <div asp-validation-summary="ModelOnly"></div>
-        <style>
-            label {
-                font-weight: bold;
-            }
-            input, textarea {
-                background: #13283614;
-                padding: 0.5em;
-                border-radius: 0.5em;
-                width: 100%;
-            }
-            input::placeholder {
-            }
-        </style>
+        
         <div class="border border-solid my-4 p-4 shadow rounded flex flex-wrap gap-2">
             <div class="flex-grow">
                 <label asp-for="Title"></label>
@@ -52,11 +40,11 @@
                 <input asp-for="Tags" placeholder="Cruise, Ocean, Journey"/>
                 <span asp-validation-for="Tags"></span>
             </div>
-            <div class="grid">
-                <label>
+            <div class="flex flex-col flex-grow flex-wrap">
+                <label asp-for="IsSponsored">
                     Sponsored
                 </label>
-                 <input asp-for="IsSponsored" type="checkbox" class="w-6 h-6"/> 
+                 <input asp-for="IsSponsored" type="checkbox" class="w-6 min-h-6 m-2"/> 
             </div>
         </div>
         <div class="border border-solid my-4 p-4 shadow rounded">
